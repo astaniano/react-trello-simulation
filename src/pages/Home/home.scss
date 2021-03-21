@@ -1,5 +1,7 @@
-.boardContainer {
+.boardsContainer {
   display: flex;
+  flex-wrap: wrap;
   width: 650px;
   justify-content: space-around;
+  height: 100px;
 }
