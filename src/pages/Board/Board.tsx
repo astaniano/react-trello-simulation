@@ -1,55 +1,43 @@
 import React from 'react';
-import { compose } from 'redux';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+// import { compose } from 'redux';
+import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from '../../store/store';
-import ICard from '../../common/interfaces/ICard';
-// import List from './components/List/List';
+import List from './components/List/List';
 import './board.scss';
-
-// interface BoardSection {
-//   id: number;
-//   title: string;
-//   cards: ICard[];
-// }
-
-// type BoardProps = {
-//   title: string;
-//   lists: BoardSection[];
-// };
+import { BoardState, BoardList } from '../../store/modules/board/reducer';
 
 interface MatchParams {
   boardId: string;
 }
 
-interface BoardProps {
-  board: string;
-}
+type BoardPropsType = BoardState & RouteComponentProps<MatchParams>;
 
-// type Ff = BoardProps & RouteComponentProps<MatchParams>;
-
-const Board = (props: any): JSX.Element => {
+const Board = ({ title, lists, match }: BoardPropsType): JSX.Element => {
+  const { boardId } = match.params;
   // eslint-disable-next-line no-console
-  console.log(props);
+  console.log(boardId);
+
   return (
     <div>
-      <Link to="/">back home</Link>
-      {/* <h1>{title}</h1>
-    <div className="boardContainer">
-      {lists.map((bSection: BoardSection) => (
-        <List key={bSection.id} title={bSection.title} cards={bSection.cards} />
-      ))}
-    </div>
-    <button>Add task</button> */}
+      <NavLink to="/">back home</NavLink>
+      <h1>{title}</h1>
+      <div className="boardContainer">
+        {lists.map((boardList: BoardList) => (
+          <List key={boardList.id} title={boardList.title} cards={boardList.cards} />
+        ))}
+      </div>
+      <button>Add task</button>
     </div>
   );
 };
 
-const mapStateToProps = (state: AppState): BoardProps => ({
-  // board: state.board,
-  board: 'hi',
+const mapStateToProps = (state: AppState): BoardState => ({
+  title: state.board.title,
+  lists: state.board.lists,
 });
 
 const mapDispatchToProps = {};
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(Board);
+// export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(Board);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Board));

@@ -11,7 +11,7 @@ const Home = ({ boards }: BoardsState): JSX.Element => (
     <header>my boards</header>
     <div className="boardsContainer">
       {boards.map((b) => (
-        <BoardLabel key={b.id} title={b.title} />
+        <BoardLabel key={b.id} id={b.id} title={b.title} />
       ))}
     </div>
     <button>Add new board</button>

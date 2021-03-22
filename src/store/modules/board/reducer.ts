@@ -1,14 +1,14 @@
 import ICard from '../../../common/interfaces/ICard';
 
-export interface BoardState {
-  title: string;
-  lists: ListState[];
-}
-
-interface ListState {
+export interface BoardList {
   id: number;
   title: string;
   cards: ICard[];
+}
+
+export interface BoardState {
+  title: string;
+  lists: BoardList[];
 }
 
 const initialState: BoardState = {
