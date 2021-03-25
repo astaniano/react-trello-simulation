@@ -1,4 +1,6 @@
-interface IBoard {
+const SET_BOARDS = 'SET_BOARDS';
+
+export interface IBoard {
   id: number;
   title: string;
 }
@@ -16,8 +18,14 @@ const initialState: BoardsState = {
   ],
 };
 
-export default function reducer(state = initialState, action: { type: string }): BoardsState {
+export default function reducer(state = initialState, action: { type: typeof SET_BOARDS }): BoardsState {
   switch (action.type) {
+    case SET_BOARDS:
+      // eslint-disable-next-line no-console
+      console.log('inside SET_BOARDS in board reducer');
+      return {
+        ...state,
+      };
     default: {
       return { ...state };
     }

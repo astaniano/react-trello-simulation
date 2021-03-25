@@ -1,8 +1,10 @@
-import { createStore } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+// import { devToolsEnhancer } from 'redux-devtools-extension'; // todo enhancer
 import rootReducer from './reducer';
 import { BoardsState } from './modules/boards/reducer';
 import { BoardState } from './modules/board/reducer';
+import rootSaga from './saga';
 
 export interface AppState {
   boards: BoardsState;
@@ -10,7 +12,9 @@ export interface AppState {
   // user: UserState;
 }
 
-const store = createStore(rootReducer, devToolsEnhancer({}));
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
 // export const asyncDispatch = store.dispatch;
 export default store;

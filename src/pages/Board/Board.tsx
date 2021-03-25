@@ -13,24 +13,37 @@ interface MatchParams {
 
 type BoardPropsType = BoardState & RouteComponentProps<MatchParams>;
 
-const Board = ({ title, lists, match }: BoardPropsType): JSX.Element => {
-  const { boardId } = match.params;
-  // eslint-disable-next-line no-console
-  console.log(boardId);
+class Board extends React.Component<BoardPropsType, Record<string, never>> {
+  // constuctor({ title, lists, match }: BoardPropsType) {
+  // constuctor(props: BoardPropsType): void {
+  //   super(props);
+  // }
 
-  return (
-    <div>
-      <NavLink to="/">back home</NavLink>
-      <h1>{title}</h1>
-      <div className="boardContainer">
-        {lists.map((boardList: BoardList) => (
-          <List key={boardList.id} title={boardList.title} cards={boardList.cards} />
-        ))}
+  componentDidMount(): void {
+    // eslint-disable-next-line no-console
+    console.log('Board componentDidMount');
+  }
+
+  render(): JSX.Element {
+    const { title, lists, match } = this.props;
+    const { boardId } = match.params;
+    // eslint-disable-next-line no-console
+    console.log(boardId);
+
+    return (
+      <div>
+        <NavLink to="/">back home</NavLink>
+        <h1>{title}</h1>
+        <div className="boardContainer">
+          {lists.map((boardList: BoardList) => (
+            <List key={boardList.id} title={boardList.title} cards={boardList.cards} />
+          ))}
+        </div>
+        <button>Add task</button>
       </div>
-      <button>Add task</button>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = (state: AppState): BoardState => ({
   title: state.board.title,
