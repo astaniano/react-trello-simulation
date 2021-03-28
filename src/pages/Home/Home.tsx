@@ -28,6 +28,9 @@ class Home extends React.Component<HomePropsType, Record<string, never>> {
 
   render(): JSX.Element {
     const { boards } = this.props;
+    if (!boards) {
+      return <div>No boards, please create one </div>;
+    }
 
     return (
       <div>

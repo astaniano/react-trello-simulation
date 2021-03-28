@@ -1,18 +1,23 @@
 import axios from 'axios';
 import { api } from '../common/constants';
-// import { AxiosResponse } from 'axios'
 
 const instance = axios.create({
   baseURL: api.baseURL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer 123', // к этому мы ещё вернёмся как-нибудь потом
+    Authorization: 'Bearer 1616766919122', // к этому мы ещё вернёмся как-нибудь потом
+    // can be used later axios.defaults.headers.common['Authorization'] = store.getState().session.token;
   },
 });
 
 instance.interceptors.response.use((res) => res.data);
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type,@typescript-eslint/explicit-module-boundary-types
-export const getBoardsReq = () => instance.get('https://jsonplaceholder.typicode.com/todos/1');
+export const boardsAPI = {
+  getBoards: (): any => instance.get('/board'),
+};
+
+// export const userAPI = {
+//   login: (email: string, password: string): any => instance.post('/board', { email, password }),
+// };
 
 export default instance;

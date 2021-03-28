@@ -1,26 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects';
-// import {boardsAPI} from '../../../api/requests';
-import { AxiosResponse } from 'axios';
-import { getBoardsReq } from '../../../api/requests';
-
-type Gg = {
-  completed: boolean;
-  id: number;
-  title: string;
-  userId: number;
-};
+import { boardsAPI } from '../../../api/requests';
+import { BoardsState } from './reducer';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function* getBoards() {
-  // const res: AxiosResponse<Gg> = yield call(getBoards);
-  const res: AxiosResponse<Gg> = yield getBoardsReq();
+  const res: BoardsState = yield boardsAPI.getBoards();
 
-  // eslint-disable-next-line no-console
-  console.log('res below');
-  // eslint-disable-next-line no-console
-  console.log(res);
-
-  yield put({ type: 'SET_BOARDS' });
+  yield put({ type: 'SET_BOARDS', boards: res.boards });
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type

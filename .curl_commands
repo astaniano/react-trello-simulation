@@ -1,0 +1,18 @@
+curl -X GET https://jsonplaceholder.typicode.com/todos/1
+
+"token":"1616766919122"
+
+// create
+curl -d '{"email": "bro@gmail.com", "password": "123456"}' -H "Content-Type: application/json" -X POST https://trello-back.shpp.me/bro/api/v1/user
+
+// login
+curl -d '{"email": "bro@gmail.com", "password": "123456"}' -H "Content-Type: application/json" -X POST https://trello-back.shpp.me/bro/api/v1/login
+
+// get boards
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer 1616766919122" https://trello-back.shpp.me/bro/api/v1/board
+
+// create board
+curl -d '{"title": "курсы по вязанию крестиком=))"}' -H "Content-Type: application/json" -H "Authorization: Bearer 1616766919122" -X POST https://trello-back.shpp.me/bro/api/v1/board
+
+
+
